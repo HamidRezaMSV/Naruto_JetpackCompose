@@ -1,0 +1,25 @@
+package com.sm.borutoapp.data.local
+
+import androidx.room.TypeConverter
+import java.lang.StringBuilder
+
+class DatabaseConverter {
+
+    private val separator = ","
+
+    @TypeConverter
+    fun convertListToString(list: List<String>) : String{
+        val stringBuilder = StringBuilder()
+        for (item in list){
+            stringBuilder.append(item).append(separator)
+        }
+        stringBuilder.setLength(stringBuilder.length - separator.length)
+        return stringBuilder.toString()
+    }
+
+    @TypeConverter
+    fun convertStringToList(text:String) : List<String>{
+        return text.split(separator)
+    }
+
+}
